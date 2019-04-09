@@ -134,7 +134,7 @@ instance.prototype.actions = function (system) {
 				label: 'up/down',
 				id: 'volume',
 				default: 'volume_up',
-				choices: [{ label: 'Volume up', id: 'volume_up' }, { label: 'Colume down', id: 'volume_down' }]
+				choices: [{ label: 'Volume up', id: 'volume_up' }, { label: 'Volume down', id: 'volume_down' }]
 			}/*,{
 				type: 'textinput',
 				label: 'dB',
@@ -185,7 +185,7 @@ instance.prototype.action = function (action) {
 		case 'volume':
 			if (opt.volume == 'volume_up') {
 				cmd = 'MVUP\r';
-			} else if (opt.mute == 'volume_down') {
+			} else if (opt.volume == 'volume_down') {
 				cmd = 'MVDOWN\r';
 			}
 			break
