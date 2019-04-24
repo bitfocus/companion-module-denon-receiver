@@ -145,7 +145,7 @@ instance.prototype.actions = function (system) {
 			}*/]
 		},
 		'volume_num': {
-			label: 'Volume(specified)',
+			label: 'Set Volume',
 			options: [ {
 				type: 'textinput',
 				label: 'Volume level 00-99 (80 = 0db, 00 = -80db, 99 = mute)',
