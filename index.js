@@ -103,6 +103,17 @@ instance.prototype.CHOICES_SOURCES = [
 	{ label: 'IPOD', id: 'SIIPOD' }
 ];
 
+
+
+instance.prototype.CURSOR_CODES = [
+	{ label: 'UP', id: 'CUP' },
+	{ label: 'DOWN', id: 'CDN' },
+	{ label: 'LEFT', id: 'CLT' },
+	{ label: 'RIGHT', id: 'CRT' },
+	{ label: 'ENTER', id: 'ENT' },
+	{ label: 'RETURN', id: 'RTN' }
+];
+
 instance.prototype.actions = function (system) {
 	var self = this;
 
@@ -152,6 +163,16 @@ instance.prototype.actions = function (system) {
 				default: 'SIDVD',
 				choices: self.CHOICES_SOURCES
 			}]
+		},
+		'cursor': {
+			label: 'Cursor Keys',
+			options: [{
+				type: 'dropdown',
+				label: 'Key',
+				id: 'cursor',
+				default: 'UP',
+				choices: self.CURSOR_CODES
+			}]
 		}
 	};
 		self.setActions(actions);
@@ -192,6 +213,10 @@ instance.prototype.action = function (action) {
 
 		case 'source':
 			cmd = opt.source + '\r';
+			break
+
+		case 'cursor':
+			cmd = 'MN'+opt.cursor + '\r';
 			break
 	}
 
