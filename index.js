@@ -170,7 +170,7 @@ instance.prototype.actions = function (system) {
 				type: 'dropdown',
 				label: 'Key',
 				id: 'cursor',
-				default: 'UP',
+				default: 'CUP',
 				choices: self.CURSOR_CODES
 			}]
 		}
