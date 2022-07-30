@@ -92,12 +92,32 @@ instance.prototype.CHOICES_SOURCES = [
 	{ label: 'CD', id: 'SICD' },
 	{ label: 'TUNER', id: 'SITUNER' },
 	{ label: 'DVD', id: 'SIDVD' },
+	{ label: 'BluRay', id: 'SIBD' },
 	{ label: 'HDP', id: 'SIHDP' },
+	{ label: 'TV', id: 'SITV' },
 	{ label: 'TV/CBL', id: 'SITV/CBL' },
+	{ label: 'SAT/CBL', id: 'SISAT/CBL' },
 	{ label: 'SAT', id: 'SISAT' },
+	{ label: 'Media Player', id: 'SIMPLAY' },
+	{ label: 'Game', id: 'SIGAME' },
+	{ label: 'HD Radio', id: 'SIHDRADIO' },
+	{ label: 'NET/Online', id: 'SINET' },
+	{ label: 'Pandora', id: 'SIPANDORA' },
+	{ label: 'SiriusXM', id: 'SISIRIUSXM' },
+	{ label: 'Spotify', id: 'SISPOTIFY' },
+	{ label: 'LastFM', id: 'SILASTFM' },
+	{ label: 'Flickr', id: 'SIFLICKR' },
+	{ label: 'iRadio', id: 'SIIRADIO' },
+	{ label: 'Server', id: 'SISERVER' },
+	{ label: 'Favorites', id: 'SIFAVORITES' },
 	{ label: 'VCR', id: 'SIVCR' },
 	{ label: 'DVR', id: 'SIDVR' },
 	{ label: 'V.AUX', id: 'SIV.AUX' },
+	{ label: 'Aux1', id: 'SIAUX1' },
+	{ label: 'Aux2', id: 'SIAUX2' },
+	{ label: 'Aux3', id: 'SIAUX3' },
+	{ label: 'Aux4', id: 'SIAUX4' },
+	{ label: 'Bluetooth', id: 'SIBT' },
 	{ label: 'NET/USB', id: 'SINET/USB' },
 	{ label: 'XM', id: 'SIXM' },
 	{ label: 'IPOD', id: 'SIIPOD' }
@@ -114,7 +134,14 @@ instance.prototype.actions = function (system) {
 				label: 'on/standby',
 				id: 'power',
 				default: 'power_on',
-				choices: [{ label: 'Power on', id: 'power_on' }, { label: 'standby', id: 'power_off' }]
+				choices: [
+					{ label: 'Power on', id: 'power_on' },
+					{ label: 'standby', id: 'power_off' },
+					{ label: 'Zone2 on', id: 'Z2_on' },
+					{ label: 'Zone2 off', id: 'Z2_off' },
+					{ label: 'Zone3 on', id: 'Z3_on' },
+					{ label: 'Zone3 off', id: 'Z3_off' }
+				]
 			}]
 		},
 		'mute': {
@@ -152,6 +179,47 @@ instance.prototype.actions = function (system) {
 				default: 'SIDVD',
 				choices: self.CHOICES_SOURCES
 			}]
+		},
+		'surround': {
+			label: 'Surround mode selection',
+			options: [{
+				type: 'dropdown',
+				label: 'Select Surround mode',
+				id: 'surround',
+				default: 'MSAUTO',
+				choices: [
+					{ label: 'Movie', id: 'MSMOVIE'},
+					{ label: 'Music', id: 'MSMUSIC'},
+					{ label: 'Game', id: 'MSGAME'},
+					{ label: 'Direct', id: 'MSDIRECT'},
+					{ label: 'Pure Direct', id: 'MSPURE DIRECT'},
+					{ label: 'Stereo', id: 'MSSTEREO'},
+					{ label: 'Auto', id: 'MSAUTO'},
+					{ label: 'Dolby Digital', id: 'MSDOLBY DIGITAL'},
+					{ label: 'DTS Surround', id: 'MSDTS SURROUND'}
+				]
+			}]	
+		},
+		'navigate' : {
+			label: 'Menu Navigation Controls',
+			options: [{
+				type: 'dropdown',
+				label: 'Select Control',
+				id: 'navigate',
+				default: 'MNENT',
+				choices: [
+					{ label: 'up', id: 'MNCUP'},
+					{ label: 'down', id: 'MNCDN'},
+					{ label: 'left', id: 'MNCLT'},
+					{ label: 'right', id: 'MNCRT'},
+					{ label: 'enter', id: 'MNENT'},
+					{ label: 'return', id: 'MNRTN'},
+					{ label: 'option', id: 'MNOPT'},
+					{ label: 'info', id: 'MNINF'},
+					{ label: 'setup menu on', id: 'MNMEN ON'},
+					{ label: 'setuip menu off', id: 'MNMEN OFF'}
+				]
+			}]
 		}
 	};
 		self.setActions(actions);
@@ -171,6 +239,14 @@ instance.prototype.action = function (action) {
 				cmd = 'PWON\r';
 			} else if (opt.power == 'power_off') {
 				cmd = 'PWSTANDBY\r';
+			} else if (opt.power == 'Z2_on') {
+				cmd = 'Z2ON\r';
+			} else if (opt.power == 'Z2_off') {
+				cmd = 'Z2OFF\r';
+			} else if (opt.power == 'Z3_on') {
+				cmd = 'Z3ON\r';
+			} else if (opt.power == 'Z3_off') {
+				cmd = 'Z3OFF\r';
 			}
 			break
 
@@ -192,6 +268,14 @@ instance.prototype.action = function (action) {
 
 		case 'source':
 			cmd = opt.source + '\r';
+			break
+
+		case 'surround':
+			cmd = opt.surround + '\r';
+			break
+
+		case 'navigate':
+			cmd = opt.navigate + '\r';
 			break
 	}
 
