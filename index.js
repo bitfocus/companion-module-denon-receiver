@@ -31,6 +31,7 @@ instance.prototype.init = function () {
 				// Ignore
 			});
 		}
+		
 };
 
 instance.prototype.updateConfig = function (config) {
@@ -123,8 +124,21 @@ instance.prototype.CHOICES_SOURCES = [
 	{ label: 'IPOD', id: 'SIIPOD' }
 ];
 
+	
+
 instance.prototype.actions = function (system) {
 	var self = this;
+
+	CHOICES_VOLUME = [];
+
+		for(i = 98; i >=1; i--) {
+			db = i - 80;
+			v = String(i).padStart(2,"0");
+			CHOICES_VOLUME.push({ label:  db +'dB', id: '' + v + ''});
+		 }
+
+	CHOICES_VOLUME.push({ label: 'Mute', id: '00'});
+	console.log(CHOICES_VOLUME);
 
 	var actions = {
 		'power': {
@@ -169,6 +183,16 @@ instance.prototype.actions = function (system) {
 				default: '6',
 				regex: self.REGEX_NUMBER
 			}*/]
+		},
+		'set_volume': {
+			label: 'set volume',
+			options: [{
+				type: 'dropdown',
+				label: 'Set volume level',
+				id: 'set_volume',
+				default: '00',
+				choices: CHOICES_VOLUME
+			}]
 		},
 		'source': {
 			label: 'Source selection',
@@ -265,6 +289,10 @@ instance.prototype.action = function (action) {
 				cmd = 'MVDOWN\r';
 			}
 			break
+		
+		case 'set_volume':
+			cmd = "MV" + String(opt.set_volume).padStart( 2 , "0" ) + '\r';
+			break
 
 		case 'source':
 			cmd = opt.source + '\r';
@@ -283,6 +311,7 @@ instance.prototype.action = function (action) {
 		if (self.tcp !== undefined) {
 			debug('sending ', cmd, "to", self.tcp.host);
 			self.tcp.send(cmd);
+			console.log("Command Sent: " + cmd); 
 		}
 	}
 };
