@@ -138,7 +138,6 @@ instance.prototype.actions = function (system) {
 		 }
 
 	CHOICES_VOLUME.push({ label: 'Mute', id: '00'});
-	console.log(CHOICES_VOLUME);
 
 	var actions = {
 		'power': {
@@ -310,8 +309,7 @@ instance.prototype.action = function (action) {
 	if (cmd !== undefined) {
 		if (self.tcp !== undefined) {
 			debug('sending ', cmd, "to", self.tcp.host);
-			self.tcp.send(cmd);
-			console.log("Command Sent: " + cmd); 
+			self.tcp.send(cmd); 
 		}
 	}
 };
