@@ -3,9 +3,9 @@
 This module supports;
 
 * Multi Zone Power on/off
-* Mute on/off
-* Volume up/down
-* Source selection
+* Multi Zone Mute on/off
+* Multi Zone Volume up/down/set
+* Multi Zone Source selection
 * Surround mode selection
 * Menu navigation
 

@@ -237,6 +237,26 @@ instance.prototype.actions = function (system) {
 				choices: [{ label: 'Mute on', id: 'mute_on' }, { label: 'mute off', id: 'mute_off' }]
 			}]
 		},
+		'Z2_mute': {
+			label: 'Zone 2 mute',
+			options: [{
+				type: 'dropdown',
+				label: 'on/off',
+				id: 'Z2_mute',
+				default: 'mute_on',
+				choices: [{ label: 'Mute on', id: 'mute_on' }, { label: 'mute off', id: 'mute_off' }]
+			}]
+		},
+		'Z3_mute': {
+			label: 'Zone 3 mute',
+			options: [{
+				type: 'dropdown',
+				label: 'on/off',
+				id: 'Z3_mute',
+				default: 'mute_on',
+				choices: [{ label: 'Mute on', id: 'mute_on' }, { label: 'mute off', id: 'mute_off' }]
+			}]
+		},
 		'volume': {
 			label: 'volume',
 			options: [{
@@ -402,6 +422,22 @@ instance.prototype.action = function (action) {
 				cmd = 'MUON\r';
 			} else if (opt.mute == 'mute_off') {
 				cmd = 'MUOFF\r';
+			}
+			break
+
+		case 'Z2_mute':
+			if (opt.Z2_mute == 'mute_on') {
+				cmd = 'Z2MUON\r';
+			} else if (opt.Z2_mute == 'mute_off') {
+				cmd = 'Z2MUOFF\r';
+			}
+			break
+
+		case 'Z3_mute':
+			if (opt.Z3_mute == 'mute_on') {
+				cmd = 'Z3MUON\r';
+			} else if (opt.Z3_mute == 'mute_off') {
+				cmd = 'Z3MUOFF\r';
 			}
 			break
 
