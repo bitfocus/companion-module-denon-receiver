@@ -121,6 +121,7 @@ instance.prototype.CHOICES_SOURCES = [
 	{ label: 'Bluetooth', id: 'SIBT' },
 	{ label: 'NET/USB', id: 'SINET/USB' },
 	{ label: 'XM', id: 'SIXM' },
+	{ label: '8K', id: 'SI8K' },
 	{ label: 'IPOD', id: 'SIIPOD' }
 ];
 instance.prototype.CHOICES_Z2SOURCES = [  // note: some sources above are not defined in Denon's documentation
