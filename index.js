@@ -123,8 +123,78 @@ instance.prototype.CHOICES_SOURCES = [
 	{ label: 'XM', id: 'SIXM' },
 	{ label: 'IPOD', id: 'SIIPOD' }
 ];
-
-	
+instance.prototype.CHOICES_Z2SOURCES = [  // note: some sources above are not defined in Denon's documentation
+	{ label: 'PHONO', id: 'Z2PHONO' },
+	{ label: 'CD', id: 'Z2CD' },
+	{ label: 'TUNER', id: 'Z2TUNER' },
+	{ label: 'DVD', id: 'Z2DVD' },
+	{ label: 'BluRay', id: 'Z2BD' },
+	{ label: 'Same as Main Zone', id: 'Z2SOURCE' },
+	{ label: 'TV', id: 'Z2TV' },
+	{ label: 'TV/CBL', id: 'Z2TV/CBL' },
+	{ label: 'SAT/CBL', id: 'Z2SAT/CBL' },
+	{ label: 'SAT', id: 'Z2SAT' },
+	{ label: 'Media Player', id: 'Z2MPLAY' },
+	{ label: 'Game', id: 'Z2GAME' },
+	{ label: 'HD Radio', id: 'Z2HDRADIO' },
+	{ label: 'NET/Online', id: 'Z2NET' },
+	{ label: 'Pandora', id: 'Z2PANDORA' },
+	{ label: 'SiriusXM', id: 'Z2SIRIUSXM' },
+	{ label: 'Spotify', id: 'Z2SPOTIFY' },
+	{ label: 'LastFM', id: 'Z2LASTFM' },
+	{ label: 'Flickr', id: 'Z2FLICKR' },
+	{ label: 'iRadio', id: 'Z2IRADIO' },
+	{ label: 'Server', id: 'Z2SERVER' },
+	{ label: 'Favorites', id: 'Z2FAVORITES' },
+	{ label: 'VCR', id: 'Z2VCR' },
+	{ label: 'DVR', id: 'Z2DVR' },
+	{ label: 'V.AUX', id: 'Z2V.AUX' },
+	{ label: 'Aux1', id: 'Z2AUX1' },
+	{ label: 'Aux2', id: 'Z2AUX2' },
+	{ label: 'Aux3', id: 'Z2AUX3' },
+	{ label: 'Aux4', id: 'Z2AUX4' },
+	{ label: 'Bluetooth', id: 'Z2BT' },
+	{ label: 'NET/USB', id: 'Z2NET/USB' },
+	{ label: 'XM', id: 'Z2XM' },
+	{ label: '8K', id: 'Z28K' },
+	{ label: 'IPOD', id: 'Z2IPOD' }
+];
+instance.prototype.CHOICES_Z3SOURCES = [  // note: some sources above are not defined in Denon's documentation
+	{ label: 'PHONO', id: 'Z3PHONO' },
+	{ label: 'CD', id: 'Z3CD' },
+	{ label: 'TUNER', id: 'Z3TUNER' },
+	{ label: 'DVD', id: 'Z3DVD' },
+	{ label: 'BluRay', id: 'Z3BD' },
+	{ label: 'Same as Main Zone', id: 'Z3SOURCE' },
+	{ label: 'TV', id: 'Z3TV' },
+	{ label: 'TV/CBL', id: 'Z3TV/CBL' },
+	{ label: 'SAT/CBL', id: 'Z3SAT/CBL' },
+	{ label: 'SAT', id: 'Z3SAT' },
+	{ label: 'Media Player', id: 'Z3MPLAY' },
+	{ label: 'Game', id: 'Z3GAME' },
+	{ label: 'HD Radio', id: 'Z3HDRADIO' },
+	{ label: 'NET/Online', id: 'Z3NET' },
+	{ label: 'Pandora', id: 'Z3PANDORA' },
+	{ label: 'SiriusXM', id: 'Z3SIRIUSXM' },
+	{ label: 'Spotify', id: 'Z3SPOTIFY' },
+	{ label: 'LastFM', id: 'Z3LASTFM' },
+	{ label: 'Flickr', id: 'Z3FLICKR' },
+	{ label: 'iRadio', id: 'Z3IRADIO' },
+	{ label: 'Server', id: 'Z3SERVER' },
+	{ label: 'Favorites', id: 'Z3FAVORITES' },
+	{ label: 'VCR', id: 'Z3VCR' },
+	{ label: 'DVR', id: 'Z3DVR' },
+	{ label: 'V.AUX', id: 'Z3V.AUX' },
+	{ label: 'Aux1', id: 'Z3AUX1' },
+	{ label: 'Aux3', id: 'Z3AUX2' },
+	{ label: 'Aux3', id: 'Z3AUX3' },
+	{ label: 'Aux4', id: 'Z3AUX4' },
+	{ label: 'Bluetooth', id: 'Z3BT' },
+	{ label: 'NET/USB', id: 'Z3NET/USB' },
+	{ label: 'XM', id: 'Z3XM' },
+	{ label: '8K', id: 'Z38K' },
+	{ label: 'IPOD', id: 'Z3IPOD' }
+];	
 
 instance.prototype.actions = function (system) {
 	var self = this;
@@ -175,13 +245,7 @@ instance.prototype.actions = function (system) {
 				id: 'volume',
 				default: 'volume_up',
 				choices: [{ label: 'Volume up', id: 'volume_up' }, { label: 'Volume down', id: 'volume_down' }]
-			}/*,{
-				type: 'textinput',
-				label: 'dB',
-				id: 'dBvalue',
-				default: '6',
-				regex: self.REGEX_NUMBER
-			}*/]
+			}]
 		},
 		'set_volume': {
 			label: 'set volume',
@@ -189,6 +253,46 @@ instance.prototype.actions = function (system) {
 				type: 'dropdown',
 				label: 'Set volume level',
 				id: 'set_volume',
+				default: '00',
+				choices: CHOICES_VOLUME
+			}]
+		},
+		'Z2_volume': {
+			label: 'Zone 2 volume',
+			options: [{
+				type: 'dropdown',
+				label: 'up/down',
+				id: 'Z2_volume',
+				default: 'volume_up',
+				choices: [{ label: 'Volume up', id: 'volume_up' }, { label: 'Volume down', id: 'volume_down' }]
+			}]
+		},
+		'Z2_set_volume': {
+			label: 'Zone 2 set volume',
+			options: [{
+				type: 'dropdown',
+				label: 'Set volume level',
+				id: 'Z2_set_volume',
+				default: '00',
+				choices: CHOICES_VOLUME
+			}]
+		},
+		'Z3_volume': {
+			label: 'Zone 3 volume',
+			options: [{
+				type: 'dropdown',
+				label: 'up/down',
+				id: 'Z3_volume',
+				default: 'volume_up',
+				choices: [{ label: 'Volume up', id: 'volume_up' }, { label: 'Volume down', id: 'volume_down' }]
+			}]
+		},
+		'Z3_set_volume': {
+			label: 'Zone 3 set volume',
+			options: [{
+				type: 'dropdown',
+				label: 'Set volume level',
+				id: 'Z3_set_volume',
 				default: '00',
 				choices: CHOICES_VOLUME
 			}]
@@ -201,6 +305,26 @@ instance.prototype.actions = function (system) {
 				id: 'source',
 				default: 'SIDVD',
 				choices: self.CHOICES_SOURCES
+			}]
+		},
+		'Z2_source': {
+			label: 'Zone 2 Source selection',
+			options: [{
+				type: 'dropdown',
+				label: 'Switch to source',
+				id: 'Z2_source',
+				default: 'Z2DVD',
+				choices: self.CHOICES_Z2SOURCES
+			}]
+		},
+		'Z3_source': {
+			label: 'Zone 3 Source selection',
+			options: [{
+				type: 'dropdown',
+				label: 'Switch to source',
+				id: 'Z3_source',
+				default: 'Z3DVD',
+				choices: self.CHOICES_Z3SOURCES
 			}]
 		},
 		'surround': {
@@ -288,13 +412,45 @@ instance.prototype.action = function (action) {
 				cmd = 'MVDOWN\r';
 			}
 			break
-		
+
+		case 'Z2_volume':
+			if (opt.Z2_volume == 'volume_up') {
+				cmd = 'Z2UP\r';
+			} else if (opt.Z2_volume == 'volume_down') {
+				cmd = 'Z2DOWN\r';
+			}
+			break
+
+		case 'Z3_volume':
+			if (opt.Z3_volume == 'volume_up') {
+				cmd = 'Z3UP\r';
+			} else if (opt.Z3_volume == 'volume_down') {
+				cmd = 'Z3DOWN\r';
+			}
+			break
+
 		case 'set_volume':
 			cmd = "MV" + String(opt.set_volume).padStart( 2 , "0" ) + '\r';
 			break
 
+		case 'Z2_set_volume':
+			cmd = "Z2" + String(opt.Z2_set_volume).padStart( 2 , "0" ) + '\r';
+			break
+
+		case 'Z3_set_volume':
+			cmd = "Z3" + String(opt.Z3_set_volume).padStart( 2 , "0" ) + '\r';
+			break
+
 		case 'source':
 			cmd = opt.source + '\r';
+			break
+
+		case 'Z2_source':
+			cmd = opt.Z2_source + '\r';
+			break
+
+		case 'Z3_source':
+			cmd = opt.Z3_source + '\r';
 			break
 
 		case 'surround':
