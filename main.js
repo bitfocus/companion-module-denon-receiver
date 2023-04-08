@@ -5,6 +5,7 @@ const UpdateFeedbacks = require('./feedbacks')
 const UpdateVariableDefinitions = require('./variables')
 const presets = require('./presets')
 
+
 class ModuleInstance extends InstanceBase {
 	constructor(internal) {
 		super(internal)
@@ -14,8 +15,14 @@ class ModuleInstance extends InstanceBase {
 	async init(config) {
 		this.config = config
 
-		//this.updateStatus(InstanceStatus.Ok)
+		this.initConnection()
+		this.updateActions() // export actions
+		this.updateFeedbacks() // export feedbacks
+		this.updateVariableDefinitions() // export variable definitions
+		this.initPresets()
+	}
 
+	async initConnection() {
 		if (this.socket) {
 			this.socket.destroy()
 			delete this.socket
@@ -39,21 +46,21 @@ class ModuleInstance extends InstanceBase {
 		} else {
 			this.updateStatus(InstanceStatus.BadConfig)
 		}
-
-		this.updateActions() // export actions
-		this.updateFeedbacks() // export feedbacks
-		this.updateVariableDefinitions() // export variable definitions
-		this.initPresets()
 	}
 
 	// When module gets deleted
 	async destroy() {
 		this.log('debug', 'destroy')
+		if (this.socket) 
+			{this.socket.destroy()
+		}
 	}
 
 	async configUpdated(config) {
-		this.config = config
-		this.init()
+		if (config.host !== this.config.host) {
+			this.config = config
+			this.initConnection()
+		}
 	}
 
 	// Return config fields for web config
