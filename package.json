@@ -11,7 +11,6 @@
 		"url": "git+https://github.com/bitfocus/companion-module-denon-receiver.git"
 	},
 	"dependencies": {
-		"18": "^0.0.0",
 		"@companion-module/base": "~1.2.0"
 	},
 	"devDependencies": {

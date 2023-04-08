@@ -37,7 +37,6 @@ const CHOICES_SOURCES = [
 	{ label: 'IPOD', id: 'IPOD' },
 ]
 const PRESETS_LIST = [
-	//{label: name of the action, id: action id, act: action name, cat: category}
 	{ label: 'main power on', id: 'PWON', act: 'power', cat: 'Power' },
 	{ label: 'zone 2 power on', id: 'Z2ON', act: 'power', cat: 'Power' },
 	{ label: 'zone 3 power on', id: 'Z3ON', act: 'power', cat: 'Power' },
@@ -46,7 +45,6 @@ const PRESETS_LIST = [
 	{ label: 'zone 3 power off', id: 'Z3OFF', act: 'power', cat: 'Power' },
 ]
 const PRESETS_VOL = [
-	//VOLUME needs to be moved to its own area (or figure out the expansion problem)
 	{ label: 'main zone volume up', id: 'MVUP', act: 'volume', cat: 'Volume' },
 	{ label: 'main zone volume down', id: 'MVUDOWN', act: 'volume', cat: 'Volume' },
 	{ label: 'zone 2 volume up', id: 'Z2UP', act: 'volume', cat: 'Volume' },
@@ -105,6 +103,14 @@ const PRESETS_NAVIGATE = [
 	{ label: 'setup menu on', id: 'MNMEN ON', act: 'navigate', cat: 'Menu navigation' },
 	{ label: 'setup menu off', id: 'MNMEN OFF', act: 'navigate', cat: 'Menu navigation' },
 ]
+const PRESETS_MUTE = [
+	{ label: 'Main zone mute on',  id: 'MUON',    act: 'mute', cat:'Volume' },
+	{ label: 'Main zone mute off', id: 'MUOFF',   act: 'mute', cat:'Volume' },
+	{ label: 'Zone 2 mute on',     id: 'Z2MUON',  act: 'mute', cat:'Volume' },
+	{ label: 'Zone 2 mute off',    id: 'Z2MUOFF', act: 'mute', cat:'Volume' },
+	{ label: 'Zone 3 mute on',     id: 'Z3MUON',  act: 'mute', cat:'Volume' },
+	{ label: 'Zone 3 mute off',    id: 'Z3MUOFF', act: 'mute', cat:'Volume' },
+]
 
 module.exports = {
 	initPresets: function () {
@@ -138,7 +144,6 @@ module.exports = {
 				],
 				feedbacks: [],
 			}
-			console.log('preset created -->', PRESETS_SETVOL[x].cat + '_' + PRESETS_SETVOL[x].actID + PRESETS_SETVOL[x].val1)
 		}
 
 		for (let x in PRESETS_LIST) {
@@ -259,6 +264,38 @@ module.exports = {
 								options: {
 									// options values to use
 									navigate: PRESETS_NAVIGATE[x].id,
+								},
+							},
+						],
+						up: [],
+					},
+				],
+				feedbacks: [], // You can add some presets from your module here
+			}
+		}
+
+		for (let x in PRESETS_MUTE) {
+			//Make presets based on above PRESETS_LIST
+			presets[PRESETS_MUTE[x].cat + PRESETS_MUTE[x].id] = {
+				type: 'button', // This must be 'button' for now
+				category: PRESETS_MUTE[x].cat, // This groups presets into categories in the ui. Try to create logical groups to help users find presets
+				name: PRESETS_MUTE[x].label, // A name for the preset. Shown to the user when they hover over it
+				style: {
+					// This is the minimal set of style properties you must define
+					text: PRESETS_MUTE[x].label + '\\n', // You can use variables from your module here
+					size: 'auto',
+					color: combineRgb(255, 255, 255),
+					bgcolor: combineRgb(0, 0, 0),
+				},
+				steps: [
+					{
+						down: [
+							{
+								// add an action on down press
+								actionId: PRESETS_MUTE[x].act,
+								options: {
+									// options values to use
+									mute: PRESETS_MUTE[x].id,
 								},
 							},
 						],

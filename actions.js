@@ -42,7 +42,7 @@ module.exports = function (self) {
 	for (i = 98; i >= 1; i--) {
 		db = i - 80
 		v = String(i).padStart(2, '0')
-		CHOICES_VOLUME.push({ label: db + 'dB', id: '' + v + '' })
+		CHOICES_VOLUME.push({ label: db + 'dB', id: v })
 	}
 
 	CHOICES_VOLUME.push({ label: 'Mute', id: '00' })
@@ -55,7 +55,7 @@ module.exports = function (self) {
 					type: 'dropdown',
 					label: 'on/standby',
 					id: 'power',
-					default: 'PWON\r',
+					default: 'PWON',
 					choices: [
 						{ label: 'Power on', id: 'PWON' },
 						{ label: 'standby', id: 'PWSTANDBY' },
@@ -66,9 +66,8 @@ module.exports = function (self) {
 					],
 				},
 			],
-			callback: async (event) => {
+			callback: (event) => {
 				var cmd = event.options.power + '\r'
-				console.log('command sent to denon ->', cmd)
 				self.socket.send(cmd)
 			},
 		},
@@ -79,20 +78,19 @@ module.exports = function (self) {
 					type: 'dropdown',
 					label: 'zone/on/off',
 					id: 'mute',
-					default: 'MUON\r',
+					default: 'MUON',
 					choices: [
-						{ label: 'Main zone mute on', id: 'MUON\r' },
-						{ label: 'Main zone mute off', id: 'MUOFF\r' },
-						{ label: 'Zone 2 mute on', id: 'Z2MUON\r' },
-						{ label: 'Zone 2 mute off', id: 'Z2MUOFF\r' },
-						{ label: 'Zone 3 mute on', id: 'Z3MUON\r' },
-						{ label: 'Zone 3 mute off', id: 'Z3MUOFF\r' },
+						{ label: 'Main zone mute on', id: 'MUON' },
+						{ label: 'Main zone mute off', id: 'MUOFF' },
+						{ label: 'Zone 2 mute on', id: 'Z2MUON' },
+						{ label: 'Zone 2 mute off', id: 'Z2MUOFF' },
+						{ label: 'Zone 3 mute on', id: 'Z3MUON' },
+						{ label: 'Zone 3 mute off', id: 'Z3MUOFF' },
 					],
 				},
 			],
-			callback: async (event) => {
-				var cmd = event.options.mute
-				console.log('command sent to denon ->', cmd)
+			callback: (event) => {
+				var cmd = event.options.mute + '\r'
 				self.socket.send(cmd)
 			},
 		},
@@ -103,7 +101,7 @@ module.exports = function (self) {
 					type: 'dropdown',
 					label: 'zone/up/down',
 					id: 'volume',
-					default: 'volume_up',
+					default: 'MVUP',
 					choices: [
 						{ label: 'Main Zone volume up', id: 'MVUP' },
 						{ label: 'Main Zone volume down', id: 'MVDOWN' },
@@ -114,9 +112,8 @@ module.exports = function (self) {
 					],
 				},
 			],
-			callback: async (event) => {
+			callback: (event) => {
 				var cmd = event.options.volume + '\r'
-				console.log('command sent to denon ->', cmd)
 				self.socket.send(cmd)
 			},
 		},
@@ -141,9 +138,8 @@ module.exports = function (self) {
 					choices: CHOICES_VOLUME,
 				},
 			],
-			callback: async (event) => {
-				var cmd = event.options.zone + String(event.options.set_volume).padStart(2, '0') + '\r'
-				console.log('command sent to denon ->', cmd)
+			callback: (event) => {
+				var cmd = `${event.options.zone}${event.options.set_volume}\r`
 				self.socket.send(cmd)
 			},
 		},
@@ -169,9 +165,8 @@ module.exports = function (self) {
 					choices: CHOICES_SOURCES,
 				},
 			],
-			callback: async (event) => {
+			callback: (event) => {
 				var cmd = event.options.zone + event.options.source + '\r'
-				console.log('command sent to denon ->', cmd)
 				self.socket.send(cmd)
 			},
 		},
@@ -196,9 +191,8 @@ module.exports = function (self) {
 					],
 				},
 			],
-			callback: async (event) => {
+			callback: (event) => {
 				var cmd = event.options.surround + '\r'
-				console.log('command sent to denon ->', cmd)
 				self.socket.send(cmd)
 			},
 		},
@@ -224,9 +218,8 @@ module.exports = function (self) {
 					],
 				},
 			],
-			callback: async (event) => {
+			callback: (event) => {
 				var cmd = event.options.navigate + '\r'
-				console.log('command sent to denon ->', cmd)
 				self.socket.send(cmd)
 			},
 		},
