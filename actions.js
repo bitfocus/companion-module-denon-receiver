@@ -34,10 +34,10 @@ const CHOICES_SOURCES = [
 	{ label: '8K', id: '8K' },
 	{ label: 'IPOD', id: 'IPOD' },
 	{ label: 'Same as zone 1', id: 'SOURCE' },
-	{ label: 'Quickselect 1', id: 'QUICK1' },
-	{ label: 'Quickselect 2', id: 'QUICK2' },
-	{ label: 'Quickselect 3', id: 'QUICK3' },
-	{ label: 'Quickselect 4', id: 'QUICK4' },
+	{ label: 'Quickselect 1', id: 'MSQUICK1' },
+	{ label: 'Quickselect 2', id: 'MSQUICK2' },
+	{ label: 'Quickselect 3', id: 'MSQUICK3' },
+	{ label: 'Quickselect 4', id: 'MSQUICK4' },
 ]
 
 module.exports = function (self) {
