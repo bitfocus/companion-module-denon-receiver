@@ -33,7 +33,9 @@ const CHOICES_SOURCES = [
 	{ label: 'XM', id: 'XM' },
 	{ label: '8K', id: '8K' },
 	{ label: 'IPOD', id: 'IPOD' },
-	]
+	{ label: 'Same as zone 1', id: 'SOURCE' },
+]
+	
 
 module.exports = function (self) {
 	CHOICES_VOLUME = []
