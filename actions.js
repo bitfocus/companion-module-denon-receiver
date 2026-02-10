@@ -35,6 +35,7 @@ const CHOICES_SOURCES = [
 	{ label: 'IPOD', id: 'IPOD' },
 	{ label: 'Same as zone 1', id: 'SOURCE' },
 ]
+	
 
 module.exports = function (self) {
 	CHOICES_VOLUME = []
@@ -215,6 +216,10 @@ module.exports = function (self) {
 						{ label: 'info', id: 'MNINF' },
 						{ label: 'setup menu on', id: 'MNMEN ON' },
 						{ label: 'setuip menu off', id: 'MNMEN OFF' },
+						{ label: 'Quickselect 1', id: 'MSQUICK1' },
+						{ label: 'Quickselect 2', id: 'MSQUICK2' },
+						{ label: 'Quickselect 3', id: 'MSQUICK3' },
+						{ label: 'Quickselect 4', id: 'MSQUICK4' },
 					],
 				},
 			],
